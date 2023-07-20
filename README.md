@@ -5,28 +5,101 @@
 
 ## 1. Introduction
 
-**TOmicsVis**: TranscriptOmics Visualization.
+#### 1.1 Meta Information
 
-**Github**: <https://github.com/benben-miao/TOmicsVis/>
+**TOmicsVis**: TranscriptOmics Visualization.
 
 **Website**: <https://benben-miao.github.io/TOmicsVis/>
 
-**Author**: [Benben Miao:
-https://github.com/benben-miao](https://github.com/benben-miao),  
-[Wei Dong:
-https://github.com/dongwei1220](https://github.com/dongwei1220)
+#### 1.2 Github and CRAN Install
 
-## 2. Install package
+**1.2.1 Install required packages from Bioconductor:**
 
 ``` r
-# 1. TOmicsVis
-# install.packages("devtools")
-# devtools::install_github("benben-miao/TOmicsVis")
+# Install required packages from Bioconductor
+install.packages("BiocManager")
+BiocManager::install(c("ComplexHeatmap", "EnhancedVolcano", "clusterProfiler", "enrichplot", "impute", "preprocessCore", "Mfuzz"))
+```
+
+**1.2.2 Github**: <https://github.com/benben-miao/TOmicsVis/>
+
+**Install from Github:**
+
+``` r
+install.packages("devtools")
+devtools::install_github("benben-miao/TOmicsVis")
+
+# Resolve network by GitClone
+devtools::install_git("https://gitclone.com/github.com/benben-miao/TOmicsVis.git")
+```
+
+**1.2.3 CRAN**: <https://cran.r-project.org/package=TOmicsVis>
+
+**Install from CRAN:**
+
+``` r
+# Install from CRAN
+install.packages("TOmicsVis")
+```
+
+#### 1.3 Articles and Courses
+
+**Videos Courses:** <https://space.bilibili.com/34105515/channel/series>
+
+**Article Introduction:**
+[全解TOmicsVis完美应用于转录组可视化R包](https://mp.weixin.qq.com/s/g8sRcK_ExlsOFniMWEJnVQ)
+
+**Article Courses:** [TOmicsVis
+转录组学R代码分析及可视化视频](https://mp.weixin.qq.com/s/mVXJmHPAnC9J1-zMj7eG7g)
+
+#### 1.4 About and Authors
+
+**OmicsSuite**: [Omics Suite Github:
+https://github.com/omicssuite/](https://github.com/omicssuite/)
+
+**Authors**:
+
+- [benben-miao Github:
+  https://github.com/benben-miao/](https://github.com/benben-miao/)
+
+- [dongwei1220 Github:
+  https://github.com/dongwei1220/](https://github.com/dongwei1220/)
+
+## 2. Libary packages
+
+``` r
+# 1. Library TOmicsVis package
 library(TOmicsVis)
+#> 载入需要的程辑包：e1071
 #> 
 #> Registered S3 method overwritten by 'GGally':
 #>   method from   
 #>   +.gg   ggplot2
+#> 载入需要的程辑包：Biobase
+#> 载入需要的程辑包：BiocGenerics
+#> 
+#> 载入程辑包：'BiocGenerics'
+#> The following objects are masked from 'package:stats':
+#> 
+#>     IQR, mad, sd, var, xtabs
+#> The following objects are masked from 'package:base':
+#> 
+#>     anyDuplicated, aperm, append, as.data.frame, basename, cbind,
+#>     colnames, dirname, do.call, duplicated, eval, evalq, Filter, Find,
+#>     get, grep, grepl, intersect, is.unsorted, lapply, Map, mapply,
+#>     match, mget, order, paste, pmax, pmax.int, pmin, pmin.int,
+#>     Position, rank, rbind, Reduce, rownames, sapply, setdiff, sort,
+#>     table, tapply, union, unique, unsplit, which.max, which.min
+#> Welcome to Bioconductor
+#> 
+#>     Vignettes contain introductory material; view with
+#>     'browseVignettes()'. To cite Bioconductor, see
+#>     'citation("Biobase")', and for packages 'citation("pkgname")'.
+#> 
+#> 载入程辑包：'DynDoc'
+#> The following object is masked from 'package:BiocGenerics':
+#> 
+#>     path
 
 # 2. Extra package
 # install.packages("ggplot2")
@@ -49,14 +122,14 @@ data(quantile_data)
 quantile_plot(
   quantile_data,
   my_shape = "fill_circle",
-  point_size = 2.0,
+  point_size = 1.5,
   conf_int = TRUE,
   conf_level = 0.95,
   split_panel = "One_Panel",
   legend_pos = "right",
   legend_dir = "vertical",
-  sci_fill_color = "Sci_Simpsons",
-  sci_color_alpha = 0.50,
+  sci_fill_color = "Sci_AAAS",
+  sci_color_alpha = 0.75,
   ggTheme = "theme_light"
 )
 ```
@@ -102,9 +175,9 @@ corr_heatmap(
   fill_type = "full",
   lable_size = 3,
   lable_digits = 3,
-  color_low = "#008800ee",
+  color_low = "blue",
   color_mid = "white",
-  color_high = "#ff0000ee",
+  color_high = "red",
   ggTheme = "theme_light"
 )
 #> Scale for fill is already present.
@@ -136,7 +209,7 @@ pca_plot(
   pca_group_sample,
   point_size = 5,
   text_size = 5,
-  ellipse_alpha = 0.30,
+  ellipse_alpha = 0.3,
   legend_pos = "right",
   legend_dir = "vertical",
   ggTheme = "theme_light"
@@ -161,7 +234,7 @@ Dendrograms for multiple samples/groups clustering.
 # 1. Load example datasets
 data(gene_exp)
 
-# 2. Run pca_plot plot function
+# 2. Run plot function
 dendro_plot(
   gene_exp,
   dist_method = "euclidean",
@@ -182,10 +255,6 @@ dendro_plot(
 #> Registered S3 method overwritten by 'dendextend':
 #>   method     from 
 #>   rev.hclust vegan
-#> Warning: The `<scale>` argument of `guides()` cannot be `FALSE`. Use "none" instead as
-#> of ggplot2 3.3.4.
-#> ℹ The deprecated feature was likely used in the factoextra package.
-#>   Please report the issue at <]8;;https://github.com/kassambara/factoextra/issueshttps://github.com/kassambara/factoextra/issues]8;;>.
 ```
 
 ![](man/figures/README-dendro_plot-1.png)<!-- -->
@@ -211,7 +280,7 @@ data(box_data)
 # 2. Run box_plot plot function
 box_plot(
   box_data,
-  test_method = "wilcox.test",
+  test_method = "t.test",
   test_label = "p.format",
   notch = TRUE,
   group_level = "Three_Column",
@@ -261,14 +330,14 @@ data(box_data)
 # 2. Run violin_plot plot function
 violin_plot(
   box_data,
-  test_method = "wilcox.test",
+  test_method = "t.test",
   test_label = "p.format",
   group_level = "Three_Column",
   violin_orientation = "vertical",
   add_element = "boxplot",
   element_alpha = 0.5,
   my_shape = "plus_times",
-  sci_fill_color = "Sci_NPG",
+  sci_fill_color = "Sci_AAAS",
   sci_fill_alpha = 0.5,
   sci_color_alpha = 1,
   legend_pos = "right",
@@ -303,7 +372,7 @@ survival_plot(
   interval_style = "ribbon",
   risk_table = TRUE,
   num_censor = TRUE,
-  sci_palette = "npg",
+  sci_palette = "aaas",
   ggTheme = "theme_light",
   x_start = 0,
   y_start = 0,
@@ -334,14 +403,15 @@ data(tsne_data)
 # 2. Run tsne_plot plot function
 tsne_plot(
   tsne_data,
+  seed = 5,
   point_size = 4,
-  point_alpha = 0.80,
+  point_alpha = 0.8,
   text_size = 2,
-  text_alpha = 1.00,
+  text_alpha = 0.8,
   ci_level = 0.95,
-  ellipse_alpha = 0.10,
-  sci_fill_color = "Sci_NPG",
-  sci_color_alpha = 0.50,
+  ellipse_alpha = 0.3,
+  sci_fill_color = "Sci_JAMA",
+  sci_color_alpha = 0.9,
   legend_pos = "right",
   legend_dir = "vertical",
   ggTheme = "theme_light"
@@ -373,8 +443,8 @@ venn_plot(
   venn_data,
   line_type = "blank",
   ellipse_shape = "circle",
-  sci_fill_color = "Sci_D3",
-  sci_fill_alpha = 0.60
+  sci_fill_color = "Sci_AAAS",
+  sci_fill_alpha = 0.65
 )
 ```
 
@@ -388,7 +458,38 @@ Get help using command `?TOmicsVis::venn_plot` or reference page
 # ?TOmicsVis::venn_plot
 ```
 
-#### 3.3.2 circos_heatmap
+#### 3.3.2 flower_plot
+
+Venn plot for stat common and unique gene among multiple sets.
+
+``` r
+# 1. Load example datasets
+data(venn_data)
+
+# 2. Run plot function
+flower_plot(
+  venn_data,
+  angle = 90,
+  a = 0.5,
+  b = 2,
+  r = 1,
+  ellipse_col_pal = "Spectral",
+  circle_col = "white",
+  label_text_cex = 1
+)
+```
+
+![](man/figures/README-flower_plot-1.png)<!-- -->
+
+Get help using command `?TOmicsVis::flower_plot` or reference page
+<https://benben-miao.github.io/TOmicsVis/reference/flower_plot.html>.
+
+``` r
+# Get help with command in R console.
+# ?TOmicsVis::flower_plot
+```
+
+#### 3.3.3 circos_heatmap
 
 Circos heatmap plot for visualizing gene expressing in multiple samples.
 
@@ -399,14 +500,14 @@ data(circos_heatmap_data)
 # 2. Run circos_heatmap plot function
 circos_heatmap(
   circos_heatmap_data,
-  low_color = "#008800aa",
+  low_color = "#0000ff",
   mid_color = "#ffffff",
-  high_color = "#ff0000aa",
-  gap_size = 45,
+  high_color = "#ff0000",
+  gap_size = 10,
   cluster_method = "complete",
   distance_method = "euclidean",
   dend_height = 0.2,
-  rowname_size = 0.5
+  rowname_size = 0.8
 )
 ```
 
@@ -420,7 +521,7 @@ Get help using command `?TOmicsVis::circos_heatmap` or reference page
 # ?TOmicsVis::circos_heatmap
 ```
 
-#### 3.3.3 volcano_plot
+#### 3.3.4 volcano_plot
 
 Volcano plot for visualizing differentailly expressed genes.
 
@@ -433,10 +534,10 @@ volcano_plot(
   deg_data,
   log2fc_cutoff = 1,
   pq_value = "pvalue",
-  pq_cutoff = 0.01,
+  pq_cutoff = 0.005,
   cutoff_line = "longdash",
   point_shape = "large_circle",
-  point_size = 1.5,
+  point_size = 1,
   point_alpha = 0.5,
   color_normal = "#888888",
   color_log2fc = "#008000",
@@ -444,7 +545,7 @@ volcano_plot(
   color_Log2fc_p = "#ff0000",
   label_size = 3,
   boxed_labels = FALSE,
-  draw_connectors = TRUE,
+  draw_connectors = FALSE,
   legend_pos = "right"
 )
 ```
@@ -459,7 +560,7 @@ Get help using command `?TOmicsVis::volcano_plot` or reference page
 # ?TOmicsVis::volcano_plot
 ```
 
-#### 3.3.4 ma_plot
+#### 3.3.5 ma_plot
 
 MversusA plot for visualizing differentially expressed genes.
 
@@ -472,10 +573,10 @@ ma_plot(
   deg_data2,
   foldchange = 2,
   fdr_value = 0.05,
-  point_size = 1.5,
-  color_up = "#FF000088",
-  color_down = "#00880088",
-  color_alpha = 0.20,
+  point_size = 0.5,
+  color_up = "#FF0000",
+  color_down = "#008800",
+  color_alpha = 0.5,
   top_method = "fc",
   top_num = 20,
   label_size = 8,
@@ -497,7 +598,7 @@ Get help using command `?TOmicsVis::ma_plot` or reference page
 # ?TOmicsVis::ma_plot
 ```
 
-#### 3.3.5 heatmap_group
+#### 3.3.6 heatmap_group
 
 Heatmap group for visualizing grouped gene expression data.
 
@@ -515,7 +616,7 @@ head(heatmap_group_data)
 
 # 2. Run heatmap_group plot function
 heatmap_group(
-  heatmap_group_data,
+  data = heatmap_group_data,
   scale_data = "none",
   clust_method = "complete",
   border_show = TRUE,
@@ -523,7 +624,7 @@ heatmap_group(
   low_color = "#00880088",
   mid_color = "#ffffff",
   high_color = "#ff000088",
-  na_color = "#ffaa00",
+  na_color = "#ff8800",
   x_angle = 45
 )
 ```
@@ -538,17 +639,93 @@ Get help using command `?TOmicsVis::heatmap_group` or reference page
 # ?TOmicsVis::heatmap_group
 ```
 
-#### 3.3.6 gene_rank_plot
+### 3.4 Advanced Analysis
 
-Gene ranking dotplot for visualizing differentailly expressed genes.
+#### 3.4.1 trend_plot
+
+Trend plot for visualizing gene expression trend profile in multiple
+traits.
+
+``` r
+# 1. Load chord_data example datasets
+data(trend_data)
+
+# 2. Run trend_plot plot function
+trend_plot(
+  trend_data,
+  scale_method = "globalminmax",
+  miss_value = "exclude",
+  line_alpha = 0.5,
+  show_points = TRUE,
+  show_boxplot = TRUE,
+  num_column = 2,
+  xlab = "Traits",
+  ylab = "Genes Expression",
+  sci_fill_color = "Sci_AAAS",
+  sci_fill_alpha = 0.8,
+  sci_color_alpha = 0.8,
+  legend_pos = "right",
+  legend_dir = "vertical",
+  ggTheme = "theme_light"
+)
+```
+
+![](man/figures/README-trend_plot-1.png)<!-- -->
+
+Get help using command `?TOmicsVis::trend_plot` or reference page
+<https://benben-miao.github.io/TOmicsVis/reference/trend_plot.html>.
+
+``` r
+# Get help with command in R console.
+# ?TOmicsVis::trend_plot
+```
+
+#### 3.4.2 gene_cluster_trend
+
+Gene cluster trend plot for visualizing gene expression trend profile in
+multiple samples.
+
+``` r
+# 1. Load example datasets
+data(gene_cluster_data)
+
+# 2. Run plot function
+gene_cluster_trend(
+  gene_cluster_data,
+  thres = 0.25,
+  min_std = 0.2,
+  palette = "PiYG",
+  cluster_num = 4
+)
+#> 0 genes excluded.
+#> 12 genes excluded.
+```
+
+![](man/figures/README-gene_cluster_trend-1.png)<!-- -->
+
+    #> NULL
+
+Get help using command `?TOmicsVis::gene_cluster_trend` or reference
+page
+<https://benben-miao.github.io/TOmicsVis/reference/gene_cluster_trend.html>.
+
+``` r
+# Get help with command in R console.
+# ?TOmicsVis::gene_cluster_trend
+```
+
+#### 3.4.3 gene_rank_plot
+
+Gene cluster trend plot for visualizing gene expression trend profile in
+multiple samples.
 
 ``` r
 # 1. Load example datasets
 data(deg_data)
 
-# 2. Run gene_rank_plot plot function
+# 2. Run plot function
 gene_rank_plot(
-  deg_data,
+  data = deg_data,
   log2fc = 1,
   palette = "Spectral",
   top_n = 10,
@@ -571,48 +748,7 @@ Get help using command `?TOmicsVis::gene_rank_plot` or reference page
 # ?TOmicsVis::gene_rank_plot
 ```
 
-### 3.4 Advanced Analysis
-
-#### 3.4.1 trend_plot
-
-Trend plot for visualizing gene expression trend profile in multiple
-traits.
-
-``` r
-# 1. Load chord_data example datasets
-data(trend_data)
-
-# 2. Run trend_plot plot function
-trend_plot(
-  trend_data,
-  scale_method = "globalminmax",
-  miss_value = "exclude",
-  line_alpha = 0.3,
-  show_points = TRUE,
-  show_boxplot = TRUE,
-  num_column = 2,
-  xlab = "Traits",
-  ylab = "Genes Expression",
-  sci_fill_color = "Sci_Futurama",
-  sci_fill_alpha = 0.5,
-  sci_color_alpha = 0.5,
-  legend_pos = "right",
-  legend_dir = "vertical",
-  ggTheme = "theme_light"
-)
-```
-
-![](man/figures/README-trend_plot-1.png)<!-- -->
-
-Get help using command `?TOmicsVis::trend_plot` or reference page
-<https://benben-miao.github.io/TOmicsVis/reference/trend_plot.html>.
-
-``` r
-# Get help with command in R console.
-# ?TOmicsVis::trend_plot
-```
-
-#### 3.4.2 wgcna_pipeline
+#### 3.4.4 wgcna_pipeline
 
 WGCNA analysis pipeline for RNA-Seq.
 
@@ -633,7 +769,7 @@ Get help using command `?TOmicsVis::wgcna_pipeline` or reference page
 # ?TOmicsVis::wgcna_pipeline
 ```
 
-#### 3.4.3 network_plot
+#### 3.4.5 network_plot
 
 Network plot for analyzing and visualizing relationship of genes.
 
@@ -648,20 +784,19 @@ head(network_data)
 #> 4  ABL2  chi-miR-15b-5p
 #> 5 CASP2 PC-3p-10204_250
 #> 6 CASP2    bta-miR-6123
-network_data <- head(network_data, 150)
 
 # 2. Run network_plot plot function
 network_plot(
   network_data,
   calcBy = "degree",
-  degreeValue = 0.1,
-  nodeColorNormal = "#ff880055",
+  degreeValue = 0.05,
+  nodeColorNormal = "#00888888",
   nodeBorderColor = "#FFFFFF",
-  nodeColorFrom = "#ff000055",
-  nodeColorTo = "#00880055",
+  nodeColorFrom = "#FF000088",
+  nodeColorTo = "#00880088",
   nodeShapeNormal = "circle",
-  nodeShapeSpatial = "circle",
-  nodeSize = 20,
+  nodeShapeSpatial = "csquare",
+  nodeSize = 10,
   labelSize = 0.5,
   edgeCurved = TRUE,
   netLayout = "layout_on_sphere"
@@ -678,6 +813,52 @@ Get help using command `?TOmicsVis::network_plot` or reference page
 # ?TOmicsVis::network_plot
 ```
 
+#### 3.4.6 heatmap_cluster
+
+Heatmap cluster plot for visualizing clustered gene expression data.
+
+``` r
+# 1. Load example datasets
+data(gene_exp2)
+head(gene_exp2)
+#>          S1_rep1   S1_rep2    S2_rep1    S2_rep2    S3_rep1    S3_rep2
+#> Gene1  316.79234  301.5714  391.75201  344.48179  180.03179  167.99952
+#> Gene2  204.21777  194.4057   64.07219   56.34101   93.47004   87.22305
+#> Gene3 1049.90451  999.4598 3196.23863 2810.56888 4958.83561 4627.41614
+#> Gene4 1413.60565 1345.6862 3356.37956 2951.38662 3947.88238 3684.02909
+#> Gene5   98.77808   94.0321  401.04150  352.65038  140.01861  130.66059
+#> Gene6 1202.25882 1144.4940 1135.11172  998.14502  784.29842  731.88052
+
+# 2. Run network_plot plot function
+heatmap_cluster(
+  data = gene_exp2,
+  dist_method = "euclidean",
+  hc_method = "average",
+  k_num = 5,
+  show_rownames = FALSE,
+  palette = "Spectral",
+  cluster_pal = "Set1",
+  gaps_col = NULL,
+  angle_col = 45,
+  label_size = 10,
+  base_size = 12
+)
+```
+
+![](man/figures/README-heatmap_cluster-1.png)<!-- -->
+
+    #> Using Cluster, gene as id variables
+
+![](man/figures/README-heatmap_cluster-2.png)<!-- -->![](man/figures/README-heatmap_cluster-3.png)<!-- -->
+
+Get help using command `?TOmicsVis::heatmap_cluster` or reference page
+<https://benben-miao.github.io/TOmicsVis/reference/heatmap_cluster.html>.
+
+``` r
+# Get help with command in R console.
+# ?TOmicsVis::heatmap_cluster
+```
+
 ### 3.5 GO and KEGG Enrichment
 
 #### 3.5.1 chord_plot
@@ -687,17 +868,16 @@ Chord plot for visualizing the relationships of pathways and genes.
 ``` r
 # 1. Load chord_data example datasets
 data(chord_data)
-colnames(chord_data) <- c("G1","G2","G3","G4","G5")
 
 # 2. Run chord_plot plot function
 chord_plot(
   chord_data,
-  multi_colors = "VividColors",
+  multi_colors = "RainbowColors",
   color_alpha = 0.5,
   link_visible = TRUE,
   link_dir = -1,
   link_type = "diffHeight",
-  sector_scale = "Scale",
+  sector_scale = "Origin",
   width_circle = 3,
   dist_name = 3,
   label_dir = "Vertical",
@@ -707,107 +887,107 @@ chord_plot(
 
 ![](man/figures/README-chord_plot-1.png)<!-- -->
 
-    #>      rn cn     value1      value2 o1 o2         x1         x2       col
-    #> 1    S1 G1 0.06557377 0.024844720  5 20 1.00000000 1.00000000 #DACAA07F
-    #> 2    S2 G1 0.15555556 0.043478261  5 19 1.00000000 0.97515528 #E3B9D27F
-    #> 3    S3 G1 0.16363636 0.055900621  5 18 1.00000000 0.93167702 #C0E8D47F
-    #> 4    S4 G1 0.25454545 0.086956522  5 17 1.00000000 0.87577640 #D060897F
-    #> 5    S5 G1 0.04545455 0.006211180  5 16 1.00000000 0.78881988 #899DE77F
-    #> 6    S6 G1 0.16949153 0.062111801  5 15 1.00000000 0.78260870 #DB9AE07F
-    #> 7    S7 G1 0.09677419 0.018633540  5 14 1.00000000 0.72049689 #E4E0827F
-    #> 8    S8 G1 0.28846154 0.093167702  5 13 1.00000000 0.70186335 #7665E07F
-    #> 9    S9 G1 0.13513514 0.031055901  5 12 1.00000000 0.60869565 #B0E6797F
-    #> 10  S10 G1 0.25925926 0.043478261  5 11 1.00000000 0.57763975 #6DEBC87F
-    #> 11  S11 G1 0.17142857 0.037267081  5 10 1.00000000 0.53416149 #DFA74E7F
-    #> 12  S12 G1 0.22448980 0.068322981  5  9 1.00000000 0.49689441 #D8E0467F
-    #> 13  S13 G1 0.26086957 0.111801242  5  8 1.00000000 0.42857143 #82E6407F
-    #> 14  S14 G1 0.04545455 0.006211180  5  7 1.00000000 0.31677019 #6AE7887F
-    #> 15  S15 G1 0.08620690 0.031055901  5  6 1.00000000 0.31055901 #8B67AB7F
-    #> 16  S16 G1 0.25000000 0.074534161  5  5 1.00000000 0.27950311 #64A6737F
-    #> 17  S17 G1 0.39130435 0.055900621  5  4 1.00000000 0.20496894 #DA92817F
-    #> 18  S18 G1 0.10000000 0.031055901  5  3 1.00000000 0.14906832 #DE5ACB7F
-    #> 19  S19 G1 0.10000000 0.024844720  5  2 1.00000000 0.11801242 #D6D9E07F
-    #> 20  S20 G1 0.25862069 0.093167702  5  1 1.00000000 0.09316770 #70DBE07F
-    #> 21   S1 G2 0.26229508 0.096385542  4 20 0.93442623 1.00000000 #DACAA07F
-    #> 22   S2 G2 0.24444444 0.066265060  4 19 0.84444444 0.90361446 #E3B9D27F
-    #> 23   S3 G2 0.03636364 0.012048193  4 18 0.83636364 0.83734940 #C0E8D47F
-    #> 24   S4 G2 0.16363636 0.054216867  4 17 0.74545455 0.82530120 #D060897F
-    #> 25   S5 G2 0.04545455 0.006024096  4 16 0.95454545 0.77108434 #899DE77F
-    #> 26   S6 G2 0.30508475 0.108433735  4 15 0.83050847 0.76506024 #DB9AE07F
-    #> 27   S7 G2 0.25806452 0.048192771  4 14 0.90322581 0.65662651 #E4E0827F
-    #> 28   S8 G2 0.07692308 0.024096386  4 13 0.71153846 0.60843373 #7665E07F
-    #> 29   S9 G2 0.10810811 0.024096386  4 12 0.86486486 0.58433735 #B0E6797F
-    #> 30  S10 G2 0.33333333 0.054216867  4 11 0.74074074 0.56024096 #6DEBC87F
-    #> 31  S11 G2 0.20000000 0.042168675  4 10 0.82857143 0.50602410 #DFA74E7F
-    #> 32  S12 G2 0.04081633 0.012048193  4  9 0.77551020 0.46385542 #D8E0467F
-    #> 33  S13 G2 0.18840580 0.078313253  4  8 0.73913043 0.45180723 #82E6407F
-    #> 34  S14 G2 0.09090909 0.012048193  4  7 0.95454545 0.37349398 #6AE7887F
-    #> 35  S15 G2 0.22413793 0.078313253  4  6 0.91379310 0.36144578 #8B67AB7F
-    #> 36  S16 G2 0.14583333 0.042168675  4  5 0.75000000 0.28313253 #64A6737F
-    #> 37  S17 G2 0.08695652 0.012048193  4  4 0.60869565 0.24096386 #DA92817F
-    #> 38  S18 G2 0.26000000 0.078313253  4  3 0.90000000 0.22891566 #DE5ACB7F
-    #> 39  S19 G2 0.30000000 0.072289157  4  2 0.90000000 0.15060241 #D6D9E07F
-    #> 40  S20 G2 0.22413793 0.078313253  4  1 0.74137931 0.07831325 #70DBE07F
-    #> 41   S1 G3 0.19672131 0.080000000  3 20 0.67213115 1.00000000 #DACAA07F
-    #> 42   S2 G3 0.04444444 0.013333333  3 19 0.60000000 0.92000000 #E3B9D27F
-    #> 43   S3 G3 0.30909091 0.113333333  3 18 0.80000000 0.90666667 #C0E8D47F
-    #> 44   S4 G3 0.21818182 0.080000000  3 17 0.58181818 0.79333333 #D060897F
-    #> 45   S5 G3 0.31818182 0.046666667  3 16 0.90909091 0.71333333 #899DE77F
-    #> 46   S6 G3 0.15254237 0.060000000  3 15 0.52542373 0.66666667 #DB9AE07F
-    #> 47   S7 G3 0.12903226 0.026666667  3 14 0.64516129 0.60666667 #E4E0827F
-    #> 48   S8 G3 0.17307692 0.060000000  3 13 0.63461538 0.58000000 #7665E07F
-    #> 49   S9 G3 0.18918919 0.046666667  3 12 0.75675676 0.52000000 #B0E6797F
-    #> 50  S10 G3 0.03703704 0.006666667  3 11 0.40740741 0.47333333 #6DEBC87F
-    #> 51  S11 G3 0.14285714 0.033333333  3 10 0.62857143 0.46666667 #DFA74E7F
-    #> 52  S12 G3 0.04081633 0.013333333  3  9 0.73469388 0.43333333 #D8E0467F
-    #> 53  S13 G3 0.11594203 0.053333333  3  8 0.55072464 0.42000000 #82E6407F
-    #> 54  S14 G3 0.09090909 0.013333333  3  7 0.86363636 0.36666667 #6AE7887F
-    #> 55  S15 G3 0.10344828 0.040000000  3  6 0.68965517 0.35333333 #8B67AB7F
-    #> 56  S16 G3 0.31250000 0.100000000  3  5 0.60416667 0.31333333 #64A6737F
-    #> 57  S17 G3 0.04347826 0.006666667  3  4 0.52173913 0.21333333 #DA92817F
-    #> 58  S18 G3 0.26000000 0.086666667  3  3 0.64000000 0.20666667 #DE5ACB7F
-    #> 59  S19 G3 0.10000000 0.026666667  3  2 0.60000000 0.12000000 #D6D9E07F
-    #> 60  S20 G3 0.24137931 0.093333333  3  1 0.51724138 0.09333333 #70DBE07F
-    #> 61   S1 G4 0.29508197 0.079295154  2 20 0.47540984 1.00000000 #DACAA07F
-    #> 62   S2 G4 0.33333333 0.066079295  2 19 0.55555556 0.92070485 #E3B9D27F
-    #> 63   S3 G4 0.29090909 0.070484581  2 18 0.49090909 0.85462555 #C0E8D47F
-    #> 64   S4 G4 0.05454545 0.013215859  2 17 0.36363636 0.78414097 #D060897F
-    #> 65   S5 G4 0.04545455 0.004405286  2 16 0.59090909 0.77092511 #899DE77F
-    #> 66   S6 G4 0.22033898 0.057268722  2 15 0.37288136 0.76651982 #DB9AE07F
-    #> 67   S7 G4 0.48387097 0.066079295  2 14 0.51612903 0.70925110 #E4E0827F
-    #> 68   S8 G4 0.25000000 0.057268722  2 13 0.46153846 0.64317181 #7665E07F
-    #> 69   S9 G4 0.08108108 0.013215859  2 12 0.56756757 0.58590308 #B0E6797F
-    #> 70  S10 G4 0.14814815 0.017621145  2 11 0.37037037 0.57268722 #6DEBC87F
-    #> 71  S11 G4 0.22857143 0.035242291  2 10 0.48571429 0.55506608 #DFA74E7F
-    #> 72  S12 G4 0.32653061 0.070484581  2  9 0.69387755 0.51982379 #D8E0467F
-    #> 73  S13 G4 0.20289855 0.061674009  2  8 0.43478261 0.44933921 #82E6407F
-    #> 74  S14 G4 0.63636364 0.061674009  2  7 0.77272727 0.38766520 #6AE7887F
-    #> 75  S15 G4 0.27586207 0.070484581  2  6 0.58620690 0.32599119 #8B67AB7F
-    #> 76  S16 G4 0.25000000 0.052863436  2  5 0.29166667 0.25550661 #64A6737F
-    #> 77  S17 G4 0.43478261 0.044052863  2  4 0.47826087 0.20264317 #DA92817F
-    #> 78  S18 G4 0.22000000 0.048458150  2  3 0.38000000 0.15859031 #DE5ACB7F
-    #> 79  S19 G4 0.35000000 0.061674009  2  2 0.50000000 0.11013216 #D6D9E07F
-    #> 80  S20 G4 0.18965517 0.048458150  2  1 0.27586207 0.04845815 #70DBE07F
-    #> 81   S1 G5 0.18032787 0.057291667  1 20 0.18032787 1.00000000 #DACAA07F
-    #> 82   S2 G5 0.22222222 0.052083333  1 19 0.22222222 0.94270833 #E3B9D27F
-    #> 83   S3 G5 0.20000000 0.057291667  1 18 0.20000000 0.89062500 #C0E8D47F
-    #> 84   S4 G5 0.30909091 0.088541667  1 17 0.30909091 0.83333333 #D060897F
-    #> 85   S5 G5 0.54545455 0.062500000  1 16 0.54545455 0.74479167 #899DE77F
-    #> 86   S6 G5 0.15254237 0.046875000  1 15 0.15254237 0.68229167 #DB9AE07F
-    #> 87   S7 G5 0.03225806 0.005208333  1 14 0.03225806 0.63541667 #E4E0827F
-    #> 88   S8 G5 0.21153846 0.057291667  1 13 0.21153846 0.63020833 #7665E07F
-    #> 89   S9 G5 0.48648649 0.093750000  1 12 0.48648649 0.57291667 #B0E6797F
-    #> 90  S10 G5 0.22222222 0.031250000  1 11 0.22222222 0.47916667 #6DEBC87F
-    #> 91  S11 G5 0.25714286 0.046875000  1 10 0.25714286 0.44791667 #DFA74E7F
-    #> 92  S12 G5 0.36734694 0.093750000  1  9 0.36734694 0.40104167 #D8E0467F
-    #> 93  S13 G5 0.23188406 0.083333333  1  8 0.23188406 0.30729167 #82E6407F
-    #> 94  S14 G5 0.13636364 0.015625000  1  7 0.13636364 0.22395833 #6AE7887F
-    #> 95  S15 G5 0.31034483 0.093750000  1  6 0.31034483 0.20833333 #8B67AB7F
-    #> 96  S16 G5 0.04166667 0.010416667  1  5 0.04166667 0.11458333 #64A6737F
-    #> 97  S17 G5 0.04347826 0.005208333  1  4 0.04347826 0.10416667 #DA92817F
-    #> 98  S18 G5 0.16000000 0.041666667  1  3 0.16000000 0.09895833 #DE5ACB7F
-    #> 99  S19 G5 0.15000000 0.031250000  1  2 0.15000000 0.05729167 #D6D9E07F
-    #> 100 S20 G5 0.08620690 0.026041667  1  1 0.08620690 0.02604167 #70DBE07F
+    #>      rn         cn value1 value2 o1 o2 x1  x2       col
+    #> 1    S1 Samples.E1      4      4  5 20 61 161 #FF00007F
+    #> 2    S2 Samples.E1      7      7  5 19 45 157 #FF3D007F
+    #> 3    S3 Samples.E1      9      9  5 18 55 150 #FF7A007F
+    #> 4    S4 Samples.E1     14     14  5 17 55 141 #FFB8007F
+    #> 5    S5 Samples.E1      1      1  5 16 22 127 #FFF5007F
+    #> 6    S6 Samples.E1     10     10  5 15 59 126 #CCFF007F
+    #> 7    S7 Samples.E1      3      3  5 14 31 116 #8FFF007F
+    #> 8    S8 Samples.E1     15     15  5 13 52 113 #52FF007F
+    #> 9    S9 Samples.E1      5      5  5 12 37  98 #14FF007F
+    #> 10  S10 Samples.E1      7      7  5 11 27  93 #00FF297F
+    #> 11  S11 Samples.E1      6      6  5 10 35  86 #00FF667F
+    #> 12  S12 Samples.E1     11     11  5  9 49  80 #00FFA37F
+    #> 13  S13 Samples.E1     18     18  5  8 69  69 #00FFE07F
+    #> 14  S14 Samples.E1      1      1  5  7 22  51 #00E0FF7F
+    #> 15  S15 Samples.E1      5      5  5  6 58  50 #00A3FF7F
+    #> 16  S16 Samples.E1     12     12  5  5 48  45 #0066FF7F
+    #> 17  S17 Samples.E1      9      9  5  4 23  33 #0029FF7F
+    #> 18  S18 Samples.E1      5      5  5  3 50  24 #1400FF7F
+    #> 19  S19 Samples.E1      4      4  5  2 40  19 #5200FF7F
+    #> 20  S20 Samples.E1     15     15  5  1 58  15 #8F00FF7F
+    #> 21   S1         E2     16     16  4 20 57 166 #FF00007F
+    #> 22   S2         E2     11     11  4 19 38 150 #FF3D007F
+    #> 23   S3         E2      2      2  4 18 46 139 #FF7A007F
+    #> 24   S4         E2      9      9  4 17 41 137 #FFB8007F
+    #> 25   S5         E2      1      1  4 16 21 128 #FFF5007F
+    #> 26   S6         E2     18     18  4 15 49 127 #CCFF007F
+    #> 27   S7         E2      8      8  4 14 28 109 #8FFF007F
+    #> 28   S8         E2      4      4  4 13 37 101 #52FF007F
+    #> 29   S9         E2      4      4  4 12 32  97 #14FF007F
+    #> 30  S10         E2      9      9  4 11 20  93 #00FF297F
+    #> 31  S11         E2      7      7  4 10 29  84 #00FF667F
+    #> 32  S12         E2      2      2  4  9 38  77 #00FFA37F
+    #> 33  S13         E2     13     13  4  8 51  75 #00FFE07F
+    #> 34  S14         E2      2      2  4  7 21  62 #00E0FF7F
+    #> 35  S15         E2     13     13  4  6 53  60 #00A3FF7F
+    #> 36  S16         E2      7      7  4  5 36  47 #0066FF7F
+    #> 37  S17         E2      2      2  4  4 14  40 #0029FF7F
+    #> 38  S18         E2     13     13  4  3 45  38 #1400FF7F
+    #> 39  S19         E2     12     12  4  2 36  25 #5200FF7F
+    #> 40  S20         E2     13     13  4  1 43  13 #8F00FF7F
+    #> 41   S1         E3     12     12  3 20 41 150 #FF00007F
+    #> 42   S2         E3      2      2  3 19 27 138 #FF3D007F
+    #> 43   S3         E3     17     17  3 18 44 136 #FF7A007F
+    #> 44   S4         E3     12     12  3 17 32 119 #FFB8007F
+    #> 45   S5         E3      7      7  3 16 20 107 #FFF5007F
+    #> 46   S6         E3      9      9  3 15 31 100 #CCFF007F
+    #> 47   S7         E3      4      4  3 14 20  91 #8FFF007F
+    #> 48   S8         E3      9      9  3 13 33  87 #52FF007F
+    #> 49   S9         E3      7      7  3 12 28  78 #14FF007F
+    #> 50  S10         E3      1      1  3 11 11  71 #00FF297F
+    #> 51  S11         E3      5      5  3 10 22  70 #00FF667F
+    #> 52  S12         E3      2      2  3  9 36  65 #00FFA37F
+    #> 53  S13         E3      8      8  3  8 38  63 #00FFE07F
+    #> 54  S14         E3      2      2  3  7 19  55 #00E0FF7F
+    #> 55  S15         E3      6      6  3  6 40  53 #00A3FF7F
+    #> 56  S16         E3     15     15  3  5 29  47 #0066FF7F
+    #> 57  S17         E3      1      1  3  4 12  32 #0029FF7F
+    #> 58  S18         E3     13     13  3  3 32  31 #1400FF7F
+    #> 59  S19         E3      4      4  3  2 24  18 #5200FF7F
+    #> 60  S20         E3     14     14  3  1 30  14 #8F00FF7F
+    #> 61   S1         E4     18     18  2 20 29 227 #FF00007F
+    #> 62   S2         E4     15     15  2 19 25 209 #FF3D007F
+    #> 63   S3         E4     16     16  2 18 27 194 #FF7A007F
+    #> 64   S4         E4      3      3  2 17 20 178 #FFB8007F
+    #> 65   S5         E4      1      1  2 16 13 175 #FFF5007F
+    #> 66   S6         E4     13     13  2 15 22 174 #CCFF007F
+    #> 67   S7         E4     15     15  2 14 16 161 #8FFF007F
+    #> 68   S8         E4     13     13  2 13 24 146 #52FF007F
+    #> 69   S9         E4      3      3  2 12 21 133 #14FF007F
+    #> 70  S10         E4      4      4  2 11 10 130 #00FF297F
+    #> 71  S11         E4      8      8  2 10 17 126 #00FF667F
+    #> 72  S12         E4     16     16  2  9 34 118 #00FFA37F
+    #> 73  S13         E4     14     14  2  8 30 102 #00FFE07F
+    #> 74  S14         E4     14     14  2  7 17  88 #00E0FF7F
+    #> 75  S15         E4     16     16  2  6 34  74 #00A3FF7F
+    #> 76  S16         E4     12     12  2  5 14  58 #0066FF7F
+    #> 77  S17         E4     10     10  2  4 11  46 #0029FF7F
+    #> 78  S18         E4     11     11  2  3 19  36 #1400FF7F
+    #> 79  S19         E4     14     14  2  2 20  25 #5200FF7F
+    #> 80  S20         E4     11     11  2  1 16  11 #8F00FF7F
+    #> 81   S1         E5     11     11  1 20 11 192 #FF00007F
+    #> 82   S2         E5     10     10  1 19 10 181 #FF3D007F
+    #> 83   S3         E5     11     11  1 18 11 171 #FF7A007F
+    #> 84   S4         E5     17     17  1 17 17 160 #FFB8007F
+    #> 85   S5         E5     12     12  1 16 12 143 #FFF5007F
+    #> 86   S6         E5      9      9  1 15  9 131 #CCFF007F
+    #> 87   S7         E5      1      1  1 14  1 122 #8FFF007F
+    #> 88   S8         E5     11     11  1 13 11 121 #52FF007F
+    #> 89   S9         E5     18     18  1 12 18 110 #14FF007F
+    #> 90  S10         E5      6      6  1 11  6  92 #00FF297F
+    #> 91  S11         E5      9      9  1 10  9  86 #00FF667F
+    #> 92  S12         E5     18     18  1  9 18  77 #00FFA37F
+    #> 93  S13         E5     16     16  1  8 16  59 #00FFE07F
+    #> 94  S14         E5      3      3  1  7  3  43 #00E0FF7F
+    #> 95  S15         E5     18     18  1  6 18  40 #00A3FF7F
+    #> 96  S16         E5      2      2  1  5  2  22 #0066FF7F
+    #> 97  S17         E5      1      1  1  4  1  20 #0029FF7F
+    #> 98  S18         E5      8      8  1  3  8  19 #1400FF7F
+    #> 99  S19         E5      6      6  1  2  6  11 #5200FF7F
+    #> 100 S20         E5      5      5  1  1  5   5 #8F00FF7F
 
 Get help using command `?TOmicsVis::chord_plot` or reference page
 <https://benben-miao.github.io/TOmicsVis/reference/chord_plot.html>.
@@ -833,37 +1013,37 @@ head(go_anno)
 #> 4 gene_4
 #> 5 gene_5
 #> 6 gene_6
-#>                                                                                                 biological_process
-#> 1 GO:0003181(atrioventricular valve morphogenesis);GO:0003128(heart field specification);GO:0001756(somitogenesis)
-#> 2                                                                                                             <NA>
-#> 3                                                                                                             <NA>
-#> 4 GO:0003181(atrioventricular valve morphogenesis);GO:0003128(heart field specification);GO:0001756(somitogenesis)
-#> 5                                                                                GO:0006956(complement activation)
-#> 6                                                                                                             <NA>
-#>                    cellular_component
-#> 1    GO:0005576(extracellular region)
-#> 2     GO:0005615(extracellular space)
-#> 3                                <NA>
-#> 4    GO:0005576(extracellular region)
-#> 5 GO:0005579(membrane attack complex)
-#> 6                                <NA>
-#>                             molecular_function
-#> 1                                         <NA>
-#> 2 GO:0004866(endopeptidase inhibitor activity)
-#> 3                                         <NA>
-#> 4                                         <NA>
-#> 5                                         <NA>
-#> 6                                         <NA>
+#>                                                                                                                                                                               biological_process
+#> 1                                                                                                                                             GO:0015986(ATP synthesis coupled proton transport)
+#> 2 GO:0071236(cellular response to antibiotic);GO:0071493(cellular response to UV-B);GO:0008630(intrinsic apoptotic signaling pathway in response to DNA damage);GO:0010043(response to zinc ion)
+#> 3                                                                                                                                                               GO:0009058(biosynthetic process)
+#> 4                                                                                                                                                                 GO:0006096(glycolytic process)
+#> 5                                                                                                                                                                                           <NA>
+#> 6                                                                                                                                                                        GO:0006412(translation)
+#>                                                                           cellular_component
+#> 1 "GO:0000276(mitochondrial proton-transporting ATP synthase complex, coupling factor F(o))"
+#> 2                                                                      GO:0005737(cytoplasm)
+#> 3                                                                                       <NA>
+#> 4                                              GO:0000015(phosphopyruvate hydratase complex)
+#> 5                                                                                       <NA>
+#> 6                                              GO:0022625(cytosolic large ribosomal subunit)
+#>                                                                                                                                     molecular_function
+#> 1                    GO:0047624(adenosine-tetraphosphatase activity);GO:0015078(proton transmembrane transporter activity);GO:0016887(ATPase activity)
+#> 2 "GO:0046872(metal ion binding);GO:0003680(AT DNA binding);GO:0008301(DNA binding, bending);GO:0042277(peptide binding);GO:0008270(zinc ion binding)"
+#> 3                                                                                                                       GO:0003824(catalytic activity)
+#> 4                                                                     GO:0000287(magnesium ion binding);GO:0004634(phosphopyruvate hydratase activity)
+#> 5                                                                                                               GO:0005319(lipid transporter activity)
+#> 6                                                                               GO:0003723(RNA binding);GO:0003735(structural constituent of ribosome)
 
 data(go_deg_fc)
 head(go_deg_fc)
 #>        id log2FC
-#> 1  gene_5  -1.20
-#> 2 gene_12  -1.25
-#> 3 gene_15  -1.30
-#> 4 gene_22  -1.35
-#> 5 gene_28  -1.40
-#> 6 gene_33  -1.45
+#> 1 gene_14  -1.20
+#> 2 gene_15   1.25
+#> 3 gene_16   1.30
+#> 4 gene_17   1.35
+#> 5 gene_18  -1.50
+#> 6 gene_20  -1.55
 
 # 2. Run go_enrich analysis function
 res <- go_enrich(
@@ -874,27 +1054,27 @@ res <- go_enrich(
   qvalue_cutoff = 0.5
 )
 head(res)
-#>           ID           ontology                                    Description
-#> 1 GO:0000015 cellular component              phosphopyruvate hydratase complex
-#> 2 GO:0000027 biological process               ribosomal large subunit assembly
-#> 3 GO:0000028 biological process               ribosomal small subunit assembly
-#> 4 GO:0000280 biological process                               nuclear division
-#> 5 GO:0000287 molecular function                          magnesium ion binding
-#> 6 GO:0000334 molecular function 3-hydroxyanthranilate 3,4-dioxygenase activity
-#>   GeneRatio BgRatio      pvalue   p.adjust     qvalue
-#> 1      1/49   1/431 0.113689095 0.21992317 0.21992317
-#> 2      1/49   1/431 0.113689095 0.21992317 0.21992317
-#> 3      2/49   5/431 0.101279745 0.21992317 0.21992317
-#> 4      5/49   9/431 0.001384956 0.08171238 0.08171238
-#> 5      1/49   1/431 0.113689095 0.21992317 0.21992317
-#> 6      1/49   1/431 0.113689095 0.21992317 0.21992317
-#>                                     geneID Count
-#> 1                                  gene_89     1
-#> 2                                 gene_276     1
-#> 3                         gene_12/gene_557     2
-#> 4 gene_35/gene_58/gene_73/gene_91/gene_158     5
-#> 5                                  gene_89     1
-#> 6                                 gene_459     1
+#>           ID           ontology
+#> 1 GO:0000027 biological process
+#> 2 GO:0001732 biological process
+#> 3 GO:0001944 biological process
+#> 4 GO:0003723 molecular function
+#> 5 GO:0003735 molecular function
+#> 6 GO:0003743 molecular function
+#>                                               Description GeneRatio BgRatio
+#> 1                        ribosomal large subunit assembly      1/11   1/100
+#> 2 formation of cytoplasmic translation initiation complex      1/11   1/100
+#> 3                                 vasculature development      1/11   1/100
+#> 4                                             RNA binding      1/11  11/100
+#> 5                      structural constituent of ribosome      3/11  26/100
+#> 6                  translation initiation factor activity      1/11   1/100
+#>      pvalue  p.adjust    qvalue                  geneID Count
+#> 1 0.1100000 0.1850000 0.1578947                 gene_23     1
+#> 2 0.1100000 0.1850000 0.1578947                 gene_21     1
+#> 3 0.1100000 0.1850000 0.1578947                 gene_21     1
+#> 4 0.7421470 0.7421470 0.6334113                 gene_23     1
+#> 5 0.5849832 0.6365993 0.5433280 gene_22/gene_23/gene_24     3
+#> 6 0.1100000 0.1850000 0.1578947                 gene_21     1
 ```
 
 Get help using command `?TOmicsVis::go_enrich` or reference page
@@ -968,7 +1148,7 @@ go_enrich_bar(
   category_num = 30,
   font_size = 12,
   low_color = "#ff0000aa",
-  high_color = "#008888aa",
+  high_color = "#008800aa",
   ggTheme = "theme_light"
 )
 #> Scale for fill is already present.
@@ -1009,7 +1189,7 @@ go_enrich_dot(
   category_num = 30,
   font_size = 12,
   low_color = "#ff0000aa",
-  high_color = "#008888aa",
+  high_color = "#008800aa",
   ggTheme = "theme_light"
 )
 #> Scale for colour is already present.
@@ -1050,18 +1230,13 @@ go_enrich_tree(
   category_num = 20,
   font_size = 4,
   low_color = "#ff0000aa",
-  high_color = "#008888aa",
+  high_color = "#008800aa",
   hclust_method = "complete",
   ggTheme = "theme_light"
 )
-#> Scale for colour is already present.
-#> Adding another scale for colour, which will replace the existing scale.
 ```
 
-![](man/figures/README-go_enrich_tree-1.png)<!-- -->
-
-Get help using command `?TOmicsVis::go_enrich_tree` or reference page
-<https://benben-miao.github.io/TOmicsVis/reference/go_enrich_tree.html>.
+Get help using command `?TOmicsVis::go_enrich_tree`.
 
 ``` r
 # Get help with command in R console.
@@ -1092,7 +1267,7 @@ go_enrich_net(
   net_layout = "circle",
   net_circular = TRUE,
   low_color = "#ff0000aa",
-  high_color = "#008888aa"
+  high_color = "#008800aa"
 )
 #> Scale for size is already present.
 #> Adding another scale for size, which will replace the existing scale.
@@ -1128,21 +1303,21 @@ head(kegg_anno)
 #> 6 gene_6
 #>                                                                                                                              kegg_pathway
 #> 1 ko04810(Regulation of actin cytoskeleton);ko04510(Focal adhesion);ko04151(PI3K-Akt signaling pathway);ko04512(ECM-receptor interaction)
-#> 2                                                                                            ko04610(Complement and coagulation cascades)
+#> 2                                                                                               ko04977(Vitamin digestion and absorption)
 #> 3 ko04810(Regulation of actin cytoskeleton);ko04510(Focal adhesion);ko04151(PI3K-Akt signaling pathway);ko04512(ECM-receptor interaction)
-#> 4 ko04810(Regulation of actin cytoskeleton);ko04510(Focal adhesion);ko04151(PI3K-Akt signaling pathway);ko04512(ECM-receptor interaction)
+#> 4                                                                                               ko04977(Vitamin digestion and absorption)
 #> 5                                                                                            ko04610(Complement and coagulation cascades)
 #> 6                                                                                                                       ko04142(Lysosome)
 
 data(kegg_deg_fc)
 head(kegg_deg_fc)
 #>        id log2FC
-#> 1  gene_5  -1.20
-#> 2 gene_12  -1.25
-#> 3 gene_15  -1.30
-#> 4 gene_22  -1.35
-#> 5 gene_28  -1.40
-#> 6 gene_33  -1.45
+#> 1  gene_1   1.20
+#> 2  gene_2  -1.25
+#> 3  gene_3   1.30
+#> 4  gene_4  -1.35
+#> 5  gene_5   1.40
+#> 6 gene_30   1.45
 
 # 2. Run go_enrich analysis function
 res <- kegg_enrich(
@@ -1153,34 +1328,27 @@ res <- kegg_enrich(
   qvalue_cutoff = 1
 )
 head(res)
-#>              ID                    Description GeneRatio BgRatio     pvalue
-#> ko00240 ko00240          Pyrimidine metabolism      3/38  10/504 0.03283089
-#> ko04016 ko04016 MAPK signaling pathway - plant      2/38   6/504 0.06848785
-#> ko00052 ko00052           Galactose metabolism      1/38   1/504 0.07539683
-#> ko04066 ko04066        HIF-1 signaling pathway      2/38   7/504 0.09139001
-#> ko03010 ko03010                       Ribosome     10/38  87/504 0.09838857
-#> ko01200 ko01200              Carbon metabolism      3/38  17/504 0.12885914
-#>          p.adjust    qvalue
-#> ko00240 0.6627232 0.6627232
-#> ko04016 0.6627232 0.6627232
-#> ko00052 0.6627232 0.6627232
-#> ko04066 0.6627232 0.6627232
-#> ko03010 0.6627232 0.6627232
-#> ko01200 0.6627232 0.6627232
-#>                                                                                          geneID
-#> ko00240                                                                gene_56/gene_58/gene_112
-#> ko04016                                                                         gene_56/gene_58
-#> ko00052                                                                                 gene_22
-#> ko04066                                                                         gene_15/gene_89
-#> ko03010 gene_33/gene_72/gene_275/gene_276/gene_285/gene_286/gene_303/gene_383/gene_460/gene_557
-#> ko01200                                                               gene_89/gene_113/gene_240
-#>         Count
-#> ko00240     3
-#> ko04016     2
-#> ko00052     1
-#> ko04066     2
-#> ko03010    10
-#> ko01200     3
+#>                ID                              Description GeneRatio BgRatio
+#> ko04977   ko04977         Vitamin digestion and absorption      5/15   12/93
+#> ko04510   ko04510                           Focal adhesion      2/15    2/93
+#> ko04512   ko04512                 ECM-receptor interaction      2/15    2/93
+#> "ko00260 "ko00260 Glycine, serine and threonine metabolism      4/15   11/93
+#> ko00460   ko00460               Cyanoamino acid metabolism      4/15   11/93
+#> ko00670   ko00670                One carbon pool by folate      4/15   11/93
+#>              pvalue  p.adjust    qvalue                                geneID
+#> ko04977  0.02247971 0.1227209 0.1033439 gene_2/gene_4/gene_33/gene_34/gene_19
+#> ko04510  0.02454418 0.1227209 0.1033439                         gene_1/gene_3
+#> ko04512  0.02454418 0.1227209 0.1033439                         gene_1/gene_3
+#> "ko00260 0.07369837 0.1842459 0.1551545       gene_30/gene_15/gene_17/gene_18
+#> ko00460  0.07369837 0.1842459 0.1551545       gene_30/gene_15/gene_17/gene_18
+#> ko00670  0.07369837 0.1842459 0.1551545       gene_30/gene_15/gene_17/gene_18
+#>          Count
+#> ko04977      5
+#> ko04510      2
+#> ko04512      2
+#> "ko00260     4
+#> ko00460      4
+#> ko00670      4
 ```
 
 Get help using command `?TOmicsVis::kegg_enrich` or reference page
@@ -1215,7 +1383,7 @@ kegg_enrich_bar(
   category_num = 30,
   font_size = 12,
   low_color = "#ff0000aa",
-  high_color = "#008888aa",
+  high_color = "#008800aa",
   ggTheme = "theme_light"
 )
 #> Scale for fill is already present.
@@ -1256,7 +1424,7 @@ kegg_enrich_dot(
   category_num = 30,
   font_size = 12,
   low_color = "#ff0000aa",
-  high_color = "#008888aa",
+  high_color = "#008800aa",
   ggTheme = "theme_light"
 )
 #> Scale for colour is already present.
@@ -1297,18 +1465,13 @@ kegg_enrich_tree(
   category_num = 20,
   font_size = 4,
   low_color = "#ff0000aa",
-  high_color = "#008888aa",
+  high_color = "#008800aa",
   hclust_method = "complete",
   ggTheme = "theme_light"
 )
-#> Scale for colour is already present.
-#> Adding another scale for colour, which will replace the existing scale.
 ```
 
-![](man/figures/README-kegg_enrich_tree-1.png)<!-- -->
-
-Get help using command `?TOmicsVis::kegg_enrich_tree` or reference page
-<https://benben-miao.github.io/TOmicsVis/reference/kegg_enrich_tree.html>.
+Get help using command `?TOmicsVis::kegg_enrich_tree`.
 
 ``` r
 # Get help with command in R console.
@@ -1339,7 +1502,7 @@ kegg_enrich_net(
   net_layout = "circle",
   net_circular = TRUE,
   low_color = "#ff0000aa",
-  high_color = "#008888aa"
+  high_color = "#008800aa"
 )
 #> Scale for size is already present.
 #> Adding another scale for size, which will replace the existing scale.
@@ -1449,17 +1612,16 @@ Table filter used to filter row by column condition.
 data(table_filter_data)
 head(table_filter_data)
 #> # A tibble: 6 × 14
-#>   name         height  mass hair_…¹ skin_…² eye_c…³ birth…⁴ sex   gender homew…⁵
-#>   <chr>         <int> <dbl> <chr>   <chr>   <chr>     <dbl> <chr> <chr>  <chr>  
-#> 1 Luke Skywal…    172    77 blond   fair    blue       19   male  mascu… Tatooi…
-#> 2 C-3PO           167    75 <NA>    gold    yellow    112   none  mascu… Tatooi…
-#> 3 R2-D2            96    32 <NA>    white,… red        33   none  mascu… Naboo  
-#> 4 Darth Vader     202   136 none    white   yellow     41.9 male  mascu… Tatooi…
-#> 5 Leia Organa     150    49 brown   light   brown      19   fema… femin… Aldera…
-#> 6 Owen Lars       178   120 brown,… light   blue       52   male  mascu… Tatooi…
-#> # … with 4 more variables: species <chr>, films <list>, vehicles <list>,
-#> #   starships <list>, and abbreviated variable names ¹​hair_color, ²​skin_color,
-#> #   ³​eye_color, ⁴​birth_year, ⁵​homeworld
+#>   name      height  mass hair_color skin_color eye_color birth_year sex   gender
+#>   <chr>      <int> <dbl> <chr>      <chr>      <chr>          <dbl> <chr> <chr> 
+#> 1 Luke Sky…    172    77 blond      fair       blue            19   male  mascu…
+#> 2 C-3PO        167    75 <NA>       gold       yellow         112   none  mascu…
+#> 3 R2-D2         96    32 <NA>       white, bl… red             33   none  mascu…
+#> 4 Darth Va…    202   136 none       white      yellow          41.9 male  mascu…
+#> 5 Leia Org…    150    49 brown      light      brown           19   fema… femin…
+#> 6 Owen Lars    178   120 brown, gr… light      blue            52   male  mascu…
+#> # ℹ 5 more variables: homeworld <chr>, species <chr>, films <list>,
+#> #   vehicles <list>, starships <list>
 
 # 2. Run function
 res <- table_filter(table_filter_data, 
@@ -1467,17 +1629,16 @@ res <- table_filter(table_filter_data,
                     )
 head(res)
 #> # A tibble: 6 × 14
-#>   name      height  mass hair_color skin_…¹ eye_c…² birth…³ sex   gender homew…⁴
-#>   <chr>      <int> <dbl> <chr>      <chr>   <chr>     <dbl> <chr> <chr>  <chr>  
-#> 1 Greedo       173    74 <NA>       green   black        44 male  mascu… Rodia  
-#> 2 Nien Nunb    160    68 none       grey    black        NA male  mascu… Sullust
-#> 3 Gasgano      122    NA none       white,… black        NA male  mascu… Troiken
-#> 4 Kit Fisto    196    87 none       green   black        NA male  mascu… Glee A…
-#> 5 Plo Koon     188    80 none       orange  black        22 male  mascu… Dorin  
-#> 6 Lama Su      229    88 none       grey    black        NA male  mascu… Kamino 
-#> # … with 4 more variables: species <chr>, films <list>, vehicles <list>,
-#> #   starships <list>, and abbreviated variable names ¹​skin_color, ²​eye_color,
-#> #   ³​birth_year, ⁴​homeworld
+#>   name      height  mass hair_color skin_color eye_color birth_year sex   gender
+#>   <chr>      <int> <dbl> <chr>      <chr>      <chr>          <dbl> <chr> <chr> 
+#> 1 Greedo       173    74 <NA>       green      black             44 male  mascu…
+#> 2 Nien Nunb    160    68 none       grey       black             NA male  mascu…
+#> 3 Gasgano      122    NA none       white, bl… black             NA male  mascu…
+#> 4 Kit Fisto    196    87 none       green      black             NA male  mascu…
+#> 5 Plo Koon     188    80 none       orange     black             22 male  mascu…
+#> 6 Lama Su      229    88 none       grey       black             NA male  mascu…
+#> # ℹ 5 more variables: homeworld <chr>, species <chr>, films <list>,
+#> #   vehicles <list>, starships <list>
 ```
 
 Get help using command `?TOmicsVis::table_filter` or reference page

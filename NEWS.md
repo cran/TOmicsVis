@@ -1,3 +1,76 @@
+## TOmicsVis 1.2.3
+
+**Date**: 2023-07-20
+
+<span style="background-color: green; border-radius: 10px; padding: 0px 5px; font-weight: bold; color: white;">New Features:</span>
+
+<span style="background-color: red; border-radius: 10px; padding: 0px 5px; font-weight: bold; color: white;">Bugs Fixed:</span>
+
+1. Update R-4.2.2 to R-4.3.1.
+2. Fixed CRAN problems by close go_enrich_tree and kegg_enrich_tree.
+3. Update heatmap_cluster function.
+4. Update pkgdown website: Installation, Tutorials, Courses.
+
+---
+
+## TOmicsVis 1.2.2
+
+**Date**: 2023-07-18
+
+<span style="background-color: green; border-radius: 10px; padding: 0px 5px; font-weight: bold; color: white;">New Features:</span>
+
+<span style="background-color: red; border-radius: 10px; padding: 0px 5px; font-weight: bold; color: white;">Bugs Fixed:</span>
+
+1. Fixed `?TOmicsVis::box_plot` and `?TOmicsVis::violin_plot` by changing wilcox.test to t.test.
+2. Fixed `?TOmicsVis::dendro_plot` by adding supperssWarning.
+3. Fixed `?TOmicsVis::tsne_plot` by changing aes to aes_string.
+4. Fixed function for avoiding warning messages.
+5. Fixed `?TOmicsVis::go_enrich_bar` and `?TOmicsVis::kegg_enrich_bar` Count aes.
+
+---
+
+## TOmicsVis 1.2.1
+
+**Date**: 2023-07-14
+
+<span style="background-color: green; border-radius: 10px; padding: 0px 5px; font-weight: bold; color: white;">New Features:</span>
+
+<span style="background-color: red; border-radius: 10px; padding: 0px 5px; font-weight: bold; color: white;">Bugs Fixed:</span>
+
+1. Fixed `?TOmicsVis::tsne_plot` function.
+2. Change README.Rmd fig.width=10.00, fig.height=6.18.
+3. Update GO and KEGG example datasets.
+4. Fixed GO and KEGG enrichment results.
+
+---
+
+## TOmicsVis 1.2.0
+
+**Date**: 2023-07-07
+
+<span style="background-color: green; border-radius: 10px; padding: 0px 5px; font-weight: bold; color: white;">New Features:</span>
+
+<span style="background-color: red; border-radius: 10px; padding: 0px 5px; font-weight: bold; color: white;">Bugs Fixed:</span>
+
+1. Add e1071 to Denps in DESCRIPTION.
+2. Fixed gene_cluster_trend.R, flower_plot.
+
+---
+
+## TOmicsVis 1.1.9
+
+**Date**: 2023-07-07
+
+<span style="background-color: green; border-radius: 10px; padding: 0px 5px; font-weight: bold; color: white;">New Features:</span>
+
+1. New `?TOmicsVis::gene_cluster_data` plot function.
+2. New `?TOmicsVis::gene_cluster_trend` plot function.
+3. New `?TOmicsVis::flower_plot` plot function.
+
+<span style="background-color: red; border-radius: 10px; padding: 0px 5px; font-weight: bold; color: white;">Bugs Fixed:</span>
+
+---
+
 ## TOmicsVis 1.1.8
 
 **Date**: 2023-07-06
