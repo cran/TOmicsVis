@@ -1,7 +1,7 @@
 Package: TOmicsVis
 Type: Package
 Title: Transcriptome Visualization Process Scheme
-Version: 1.2.3
+Version: 2.0.0
 Authors@R: c(
     person(given = "Benben", family = "Miao", email = "benben.miao@outlook.com", 
     			 role = c("aut", "cre"), comment = c(ORCID = "0000-0002-7307-1331")),
@@ -17,18 +17,18 @@ Encoding: UTF-8
 LazyData: true
 Depends: R (>= 3.5), Biobase (>= 2.5.5), e1071 (>= 1.7-0)
 Imports: stats, utils, grid, graphics, grDevices, ggplot2, ggsci,
-        reshape2, ggpubr, ggcorrplot, ggforce, vegan, venn, circlize,
-        randomcoloR, ComplexHeatmap, EnhancedVolcano, GGally, survival,
-        survminer, Rtsne, dplyr, tidyr, clusterProfiler, enrichplot,
-        ggnewscale, igraph, WGCNA, stringr, pheatmap, RColorBrewer,
-        ggpolypath, factoextra, ggrepel, cowplot, ggplotify, plotrix,
-        Mfuzz
+        reshape2, ggpubr, ggcorrplot, ggforce, vegan, venn, UpSetR,
+        circlize, randomcoloR, ComplexHeatmap, EnhancedVolcano, GGally,
+        survival, survminer, Rtsne, umap, dplyr, tidyr,
+        clusterProfiler, enrichplot, ggnewscale, igraph, WGCNA,
+        stringr, pheatmap, RColorBrewer, ggpolypath, factoextra,
+        ggrepel, cowplot, ggplotify, plotrix, Mfuzz, shiny
 Suggests: knitr, rmarkdown
 VignetteBuilder: knitr
 NeedsCompilation: no
-Packaged: 2023-07-20 15:13:55 UTC; benben.miao
+Packaged: 2023-08-28 18:03:27 UTC; benben.miao
 Author: Benben Miao [aut, cre] (<https://orcid.org/0000-0002-7307-1331>),
   Wei Dong [aut] (<https://orcid.org/0000-0003-2201-7164>)
 Maintainer: Benben Miao <benben.miao@outlook.com>
 Repository: CRAN
-Date/Publication: 2023-07-20 15:40:02 UTC
+Date/Publication: 2023-08-28 18:30:02 UTC
